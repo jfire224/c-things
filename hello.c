@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 void exc_one(void) {
   printf("Ex.1:\nWrite a few printf statements and some comments");
@@ -119,7 +120,7 @@ int functions2(int *p) {
   return (*p)++;
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   exc_one(); 
   exc_two();
   exc_three();
@@ -132,7 +133,19 @@ int main() {
   printf("%d\n", x);
   printf("function can change a value of a variable that was passed to it:\n");
   printf("Value of x at address %p: %d\n", &x, x);
-  int *p_to_x = &x;
+  printf("You do it by passing\n");
+  printf(" in definition function(type *var)\n");
+  printf("And when calling function(&var)\n");
+  // int *p_to_x = &x;
   functions2(&x);
   printf("Value of x at address %p (after function call): %d\n", &x, x);
+  printf("To use cmd line args we use in argument\n");
+  printf("function(int argc, char *argv[])\n");
+  char *first_p;
+  double first_arg = strtod(argv[1], &first_p);
+  char *second_p;
+  double second_arg = strtod(argv[2], &second_p);
+  printf("The program name: %s\n", argv[0]);
+  double result = first_arg / second_arg;
+  printf("We print the division of the two arguments (%.2f and %.2f) in the corresponding order: %.2f\n", first_arg, second_arg, result);
 }
