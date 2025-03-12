@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <errno.h>
 
 void exc_one(void) {
   printf("Ex.1:\nWrite a few printf statements and some comments");
@@ -141,10 +142,28 @@ int main(int argc, char *argv[]) {
   printf("Value of x at address %p (after function call): %d\n", &x, x);
   printf("To use cmd line args we use in argument\n");
   printf("function(int argc, char *argv[])\n");
-  char *first_p;
-  double first_arg = strtod(argv[1], &first_p);
-  char *second_p;
-  double second_arg = strtod(argv[2], &second_p);
+
+  if (argc < 3) {
+    printf("Error: Please provide two numbers as command-line arguments.\n");
+    return 1;
+  }
+
+  double first_arg, second_arg;
+  char *first_endptr, *second_endptr;
+  errno = 0;
+
+  first_arg = strtod(argv[1], &first_endptr);
+  if (errno != 0 || *first_endptr != '\0') {
+    printf("Error: Invalid first argument.\n");
+    return 1;
+  }
+  
+  second_arg = strtod(argv[2], &second_endptr);
+  if (errno != 0 || *second_endptr != '\0') {
+    printf("Error: Invalid second  argument.\n");
+    return 1;
+  }
+
   printf("The program name: %s\n", argv[0]);
   double result = first_arg / second_arg;
   printf("We print the division of the two arguments (%.2f and %.2f) in the corresponding order: %.2f\n", first_arg, second_arg, result);
