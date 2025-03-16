@@ -35,7 +35,7 @@ void exc_four() {
   int z = x / y;
   printf("\nExpression of integers: %d / %d = %d\n", x, y, z);
   double c = (double) x / y;
-  printf("Expression w/ casting a type to a variable: %d + %d = %.2f", x, y, c);
+  printf("Expression w/ casting a type to a variable: %d / %d = %.2f", x, y, c);
 
 }
 
